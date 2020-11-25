@@ -8,6 +8,9 @@ namespace WindowsFormsApp1
 {
     class Prem
     {
-        public static bool key;
+        public static int key = 0;
+        public static string Role;
+        public static int kod;
+        public static int update;
     }
 }

@@ -24,7 +24,20 @@ namespace WindowsFormsApp1
             this.salesPersonTableAdapter.Fill(this.dbBoatDataSet.SalesPerson);
             LoginForm log = new LoginForm();
             log.ShowDialog();
+            if(Prem.key == 0) { Close();}
+            if (Prem.key == 1) { } else { if (Prem.key == 2) { AdminForm nn = new AdminForm(); nn.ShowDialog(); } }
+            if (Prem.key == 0) { Close(); } 
+            this.salesPersonTableAdapter.ID(dbBoatDataSet.SalesPerson,Prem.kod);
+            DateTime n1;n1=Convert.ToDateTime(dbBoatDataSet.SalesPerson[0][6]);
+            if ((n1.Day - DateTime.Now.Day) >= 14) 
+            {
+            MessageBox.Show("Смените пароль");
+            Password pas = new Password();
+            pas.ShowDialog();
+            }
 
+            this.salesPersonTableAdapter.UpdateQuery(DateTime.Now, Prem.kod);
+           
         }
     }
 }
