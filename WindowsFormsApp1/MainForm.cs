@@ -38,12 +38,18 @@ namespace WindowsFormsApp1
                     pas.ShowDialog();
                 }
                 this.salesPersonTableAdapter.UpdateQuery(DateTime.Now, Prem.kod);
-                Close();
+               // Close();
             }
             else
             {
                 Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateZaka Cz = new CreateZaka();
+            Cz.ShowDialog();
         }
     }
 }

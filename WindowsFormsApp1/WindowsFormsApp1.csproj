@@ -64,6 +64,12 @@
     <Compile Include="Boat\CreatBoatForm.Designer.cs">
       <DependentUpon>CreatBoatForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateZaka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateZaka.Designer.cs">
+      <DependentUpon>CreateZaka.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,10 +102,10 @@
     <Compile Include="Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login\MainForm.cs">
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login\MainForm.Designer.cs">
+    <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Magager\meneger.cs">
@@ -126,6 +132,9 @@
     <EmbeddedResource Include="Boat\CreatBoatForm.resx">
       <DependentUpon>CreatBoatForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CreateZaka.resx">
+      <DependentUpon>CreateZaka.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,7 +147,7 @@
     <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login\MainForm.resx">
+    <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Magager\meneger.resx">

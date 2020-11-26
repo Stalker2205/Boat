@@ -4,6 +4,13 @@
 
     partial class DbBoatDataSet
     {
+        partial class ContractDataTable
+        {
+        }
+
+        partial class OrderDataTable
+        {
+        }
     }
 }
 

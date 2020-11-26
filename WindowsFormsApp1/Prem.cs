@@ -13,5 +13,6 @@ namespace WindowsFormsApp1
         public static int kod;
         public static int update;
         public static int CodeBoat;
+        public static int numZ;
     }
 }

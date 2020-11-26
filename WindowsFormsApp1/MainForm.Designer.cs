@@ -33,6 +33,7 @@
             this.salesPersonBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.salesPersonTableAdapter = new WindowsFormsApp1.DbBoatDataSetTableAdapters.SalesPersonTableAdapter();
             this.tableAdapterManager = new WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbBoatDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesPersonBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -66,11 +67,23 @@
             this.tableAdapterManager.SalesPersonTableAdapter = this.salesPersonTableAdapter;
             this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(137, 61);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Оформить заказ";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -86,6 +99,7 @@
         private System.Windows.Forms.BindingSource salesPersonBindingSource;
         private DbBoatDataSetTableAdapters.SalesPersonTableAdapter salesPersonTableAdapter;
         private DbBoatDataSetTableAdapters.TableAdapterManager tableAdapterManager;
+        private System.Windows.Forms.Button button1;
     }
 }
 
