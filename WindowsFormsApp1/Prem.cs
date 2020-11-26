@@ -12,5 +12,6 @@ namespace WindowsFormsApp1
         public static string Role;
         public static int kod;
         public static int update;
+        public static int CodeBoat;
     }
 }

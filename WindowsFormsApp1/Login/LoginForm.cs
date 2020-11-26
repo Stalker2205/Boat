@@ -32,33 +32,33 @@ namespace WindowsFormsApp1
         DateTime dat1;
         private void LoginButton_Click(object sender, EventArgs e)
         {
-           if (pop == 0)
+            if (pop == 0)
             {
-                int sec =dat1.Minute*60+ dat1.Second+step;
-                if(sec<DateTime.Now.Minute*60+DateTime.Now.Second)
+                int sec = dat1.Minute * 60 + dat1.Second + step;
+                if (sec < DateTime.Now.Minute * 60 + DateTime.Now.Second)
                 {
                     pop = 3;
                 }
                 else
                 {
-                    MessageBox.Show("Подождите");return;
+                    MessageBox.Show("Подождите"); return;
                 }
-             }
-            if (LoginTextbox.TextLength == 0 || PasswordTextbox.TextLength == 0) { MessageBox.Show("Введите логин и пароль");return; }
+            }
+            if (LoginTextbox.TextLength == 0 || PasswordTextbox.TextLength == 0) { MessageBox.Show("Введите логин и пароль"); return; }
             this.salesPersonTableAdapter.Login(dbBoatDataSet.SalesPerson, LoginTextbox.Text, PasswordTextbox.Text);
             if (this.dbBoatDataSet.SalesPerson.Rows.Count == 1)
             {
-              Prem.Role = Convert.ToString( this.dbBoatDataSet.SalesPerson[0][5]);
+                Prem.Role = Convert.ToString(this.dbBoatDataSet.SalesPerson[0][5]);
                 Prem.kod = Convert.ToInt32(this.dbBoatDataSet.SalesPerson[0][0]);
                 if (Prem.Role == "Администратор") { Prem.key = 2; } else { Prem.key = 1; }
-              Close();
-            } 
+                Close();
+            }
             else
-            { 
+            {
                 MessageBox.Show("Вы ввели неверный логин или пароль. Пожалуйста, проверьте ещё раз введенные данные");
                 pop--;
                 popitLabel.Text = $"Количество попыток : {pop}";
-                if(pop == 0)
+                if (pop == 0)
                 {
                     dat1 = DateTime.Now;
                     MessageBox.Show($"Подождите {step} секунд");
@@ -69,7 +69,7 @@ namespace WindowsFormsApp1
                 }
                 return;
             }
-            
+
         }
     }
 }

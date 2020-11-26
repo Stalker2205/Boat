@@ -17,13 +17,6 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void salesPersonBindingNavigatorSaveItem_Click(object sender, EventArgs e)
-        {
-            this.Validate();
-            this.salesPersonBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.dbBoatDataSet);
-
-        }
 
         private void meneger_Load(object sender, EventArgs e)
         {
@@ -44,6 +37,19 @@ namespace WindowsFormsApp1
             Prem.update = Convert.ToInt32(salesPersonDataGridView[0, salesPersonDataGridView.CurrentCell.RowIndex].Value);
             UpdateMen um = new UpdateMen();
             um.ShowDialog();
+            this.salesPersonTableAdapter.Fill(this.dbBoatDataSet.SalesPerson);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int kod = Convert.ToInt32(salesPersonDataGridView[0, salesPersonDataGridView.CurrentCell.RowIndex].Value);
+            try
+            {
+                this.salesPersonTableAdapter.Delete1((int)salesPersonDataGridView[0,
+                    salesPersonDataGridView.CurrentCell.RowIndex].Value);
+            }
+            catch { MessageBox.Show("Продавец участвует в сделке, вы не можите его удалить"); return; }
+            this.salesPersonTableAdapter.Fill(this.dbBoatDataSet.SalesPerson);
         }
     }
 }

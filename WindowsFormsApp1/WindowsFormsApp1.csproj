@@ -46,22 +46,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminForm.cs">
+    <Compile Include="Boat\BoatForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminForm.Designer.cs">
+    <Compile Include="Boat\BoatForm.Designer.cs">
+      <DependentUpon>BoatForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boat\UpdateBoat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boat\UpdateBoat.Designer.cs">
+      <DependentUpon>UpdateBoat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Boat\CreatBoatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Boat\CreatBoatForm.Designer.cs">
+      <DependentUpon>CreatBoatForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateMen.cs">
+    <Compile Include="DbBoatDataSet.cs">
+      <DependentUpon>DbBoatDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Magager\UpdateMen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateMen.Designer.cs">
+    <Compile Include="Magager\UpdateMen.Designer.cs">
       <DependentUpon>UpdateMen.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreatMen.cs">
+    <Compile Include="Magager\CreatMen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreatMen.Designer.cs">
+    <Compile Include="Magager\CreatMen.Designer.cs">
       <DependentUpon>CreatMen.cs</DependentUpon>
     </Compile>
     <Compile Include="DbBoatDataSet.Designer.cs">
@@ -69,22 +90,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbBoatDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Login\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Login\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="Login\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Login\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="meneger.cs">
+    <Compile Include="Magager\meneger.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="meneger.Designer.cs">
+    <Compile Include="Magager\meneger.Designer.cs">
       <DependentUpon>meneger.cs</DependentUpon>
     </Compile>
     <Compile Include="Password.cs">
@@ -96,22 +117,31 @@
     <Compile Include="Prem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AdminForm.resx">
+    <EmbeddedResource Include="Boat\BoatForm.resx">
+      <DependentUpon>BoatForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boat\UpdateBoat.resx">
+      <DependentUpon>UpdateBoat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Boat\CreatBoatForm.resx">
+      <DependentUpon>CreatBoatForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateMen.resx">
+    <EmbeddedResource Include="Magager\UpdateMen.resx">
       <DependentUpon>UpdateMen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreatMen.resx">
+    <EmbeddedResource Include="Magager\CreatMen.resx">
       <DependentUpon>CreatMen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Login\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Login\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="meneger.resx">
+    <EmbeddedResource Include="Magager\meneger.resx">
       <DependentUpon>meneger.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Password.resx">
@@ -150,5 +180,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

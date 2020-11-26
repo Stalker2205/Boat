@@ -19,16 +19,27 @@ namespace WindowsFormsApp1
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbBoatDataSet.SalesPerson". При необходимости она может быть перемещена или удалена.
+
+
             this.salesPersonTableAdapter.Fill(this.dbBoatDataSet.SalesPerson);
-            Prem.key = 0;
-            this.salesPersonTableAdapter.UpdateQuery(DateTime.Now, Prem.kod);
+            Prem.key = 3;
+
             DateTime n1; n1 = Convert.ToDateTime(dbBoatDataSet.SalesPerson[0][6]);
+
             if ((n1.Day - DateTime.Now.Day) >= 14)
             {
                 MessageBox.Show("Смените пароль");
                 Password pas = new Password();
                 pas.ShowDialog();
+            }
+            else
+            {
+                if ((n1.Month - DateTime.Now.Month) > 1)
+                {
+                    this.salesPersonTableAdapter.Statys("Блокирована", Prem.kod); return;
+                    MessageBox.Show("Ваша учетная запись заблокирована, обратитесь к администратору"); return;
+                }
+                this.salesPersonTableAdapter.UpdateQuery(DateTime.Now, Prem.kod);
             }
         }
 
@@ -36,6 +47,12 @@ namespace WindowsFormsApp1
         {
             meneger mn = new meneger();
             mn.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            BoatForm bf = new BoatForm();
+            bf.ShowDialog();
         }
     }
 }

@@ -35,25 +35,25 @@
             System.Windows.Forms.Label loginLabel;
             System.Windows.Forms.Label passwordLabel;
             System.Windows.Forms.Label roleLabel;
-            this.dbBoatDataSet = new WindowsFormsApp1.DbBoatDataSet();
-            this.salesPersonBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.salesPersonTableAdapter = new WindowsFormsApp1.DbBoatDataSetTableAdapters.SalesPersonTableAdapter();
-            this.tableAdapterManager = new WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager();
             this.salesPersonIDTextBox = new System.Windows.Forms.TextBox();
+            this.salesPersonBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dbBoatDataSet = new WindowsFormsApp1.DbBoatDataSet();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
             this.familyNameTextBox = new System.Windows.Forms.TextBox();
             this.loginTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.salesPersonTableAdapter = new WindowsFormsApp1.DbBoatDataSetTableAdapters.SalesPersonTableAdapter();
+            this.tableAdapterManager = new WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager();
             salesPersonIDLabel = new System.Windows.Forms.Label();
             firstNameLabel = new System.Windows.Forms.Label();
             familyNameLabel = new System.Windows.Forms.Label();
             loginLabel = new System.Windows.Forms.Label();
             passwordLabel = new System.Windows.Forms.Label();
             roleLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dbBoatDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesPersonBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbBoatDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // salesPersonIDLabel
@@ -110,35 +110,6 @@
             roleLabel.TabIndex = 11;
             roleLabel.Text = "Role:";
             // 
-            // dbBoatDataSet
-            // 
-            this.dbBoatDataSet.DataSetName = "DbBoatDataSet";
-            this.dbBoatDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // salesPersonBindingSource
-            // 
-            this.salesPersonBindingSource.DataMember = "SalesPerson";
-            this.salesPersonBindingSource.DataSource = this.dbBoatDataSet;
-            // 
-            // salesPersonTableAdapter
-            // 
-            this.salesPersonTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.AccessoriesToBoatTableAdapter = null;
-            this.tableAdapterManager.AccessoryTableAdapter = null;
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.BoatTableAdapter = null;
-            this.tableAdapterManager.ContractTableAdapter = null;
-            this.tableAdapterManager.CustomerTableAdapter = null;
-            this.tableAdapterManager.InvoiceTableAdapter = null;
-            this.tableAdapterManager.OrderDetailsTableAdapter = null;
-            this.tableAdapterManager.OrderTableAdapter = null;
-            this.tableAdapterManager.PartnerTableAdapter = null;
-            this.tableAdapterManager.SalesPersonTableAdapter = this.salesPersonTableAdapter;
-            this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
             // salesPersonIDTextBox
             // 
             this.salesPersonIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salesPersonBindingSource, "SalesPersonID", true));
@@ -147,6 +118,16 @@
             this.salesPersonIDTextBox.ReadOnly = true;
             this.salesPersonIDTextBox.Size = new System.Drawing.Size(100, 20);
             this.salesPersonIDTextBox.TabIndex = 2;
+            // 
+            // salesPersonBindingSource
+            // 
+            this.salesPersonBindingSource.DataMember = "SalesPerson";
+            this.salesPersonBindingSource.DataSource = this.dbBoatDataSet;
+            // 
+            // dbBoatDataSet
+            // 
+            this.dbBoatDataSet.DataSetName = "DbBoatDataSet";
+            this.dbBoatDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // firstNameTextBox
             // 
@@ -186,7 +167,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 44);
             this.button1.TabIndex = 13;
-            this.button1.Text = "Создать";
+            this.button1.Text = "Обновить";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -200,6 +181,26 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 21);
             this.comboBox1.TabIndex = 14;
+            this.comboBox1.Text = "Менеджер";
+            // 
+            // salesPersonTableAdapter
+            // 
+            this.salesPersonTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.AccessoriesToBoatTableAdapter = null;
+            this.tableAdapterManager.AccessoryTableAdapter = null;
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.BoatTableAdapter = null;
+            this.tableAdapterManager.ContractTableAdapter = null;
+            this.tableAdapterManager.CustomerTableAdapter = null;
+            this.tableAdapterManager.InvoiceTableAdapter = null;
+            this.tableAdapterManager.OrderDetailsTableAdapter = null;
+            this.tableAdapterManager.OrderTableAdapter = null;
+            this.tableAdapterManager.PartnerTableAdapter = null;
+            this.tableAdapterManager.SalesPersonTableAdapter = this.salesPersonTableAdapter;
+            this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // UpdateMen
             // 
@@ -222,8 +223,8 @@
             this.Name = "UpdateMen";
             this.Text = "CreatMen";
             this.Load += new System.EventHandler(this.CreatMen_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dbBoatDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.salesPersonBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbBoatDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

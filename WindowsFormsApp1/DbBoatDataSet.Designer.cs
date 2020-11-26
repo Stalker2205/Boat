@@ -44,17 +44,13 @@ namespace WindowsFormsApp1 {
         
         private SalesPersonDataTable tableSalesPerson;
         
-        private global::System.Data.DataRelation relationFK_AccessoriesToBoat_Accessory;
-        
         private global::System.Data.DataRelation relationFK_AccessoriesToBoat_Boat;
+        
+        private global::System.Data.DataRelation relationFK_AccessoriesToBoat_Accessory;
         
         private global::System.Data.DataRelation relationFK_Accessory_Partner;
         
-        private global::System.Data.DataRelation relationFK_Contract_Order;
-        
         private global::System.Data.DataRelation relationFK_Invoice_Contract;
-        
-        private global::System.Data.DataRelation relationFK_Order_Boat;
         
         private global::System.Data.DataRelation relationFK_Order_Customer;
         
@@ -63,6 +59,8 @@ namespace WindowsFormsApp1 {
         private global::System.Data.DataRelation relationFK_OrderDetails_Accessory;
         
         private global::System.Data.DataRelation relationFK_OrderDetails_Order;
+        
+        private global::System.Data.DataRelation relationOrder_Contract;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -430,16 +428,15 @@ namespace WindowsFormsApp1 {
                     this.tableSalesPerson.InitVars();
                 }
             }
-            this.relationFK_AccessoriesToBoat_Accessory = this.Relations["FK_AccessoriesToBoat_Accessory"];
             this.relationFK_AccessoriesToBoat_Boat = this.Relations["FK_AccessoriesToBoat_Boat"];
+            this.relationFK_AccessoriesToBoat_Accessory = this.Relations["FK_AccessoriesToBoat_Accessory"];
             this.relationFK_Accessory_Partner = this.Relations["FK_Accessory_Partner"];
-            this.relationFK_Contract_Order = this.Relations["FK_Contract_Order"];
             this.relationFK_Invoice_Contract = this.Relations["FK_Invoice_Contract"];
-            this.relationFK_Order_Boat = this.Relations["FK_Order_Boat"];
             this.relationFK_Order_Customer = this.Relations["FK_Order_Customer"];
             this.relationFK_Order_SalesPerson = this.Relations["FK_Order_SalesPerson"];
             this.relationFK_OrderDetails_Accessory = this.Relations["FK_OrderDetails_Accessory"];
             this.relationFK_OrderDetails_Order = this.Relations["FK_OrderDetails_Order"];
+            this.relationOrder_Contract = this.Relations["Order_Contract"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -470,30 +467,30 @@ namespace WindowsFormsApp1 {
             base.Tables.Add(this.tablePartner);
             this.tableSalesPerson = new SalesPersonDataTable();
             base.Tables.Add(this.tableSalesPerson);
-            this.relationFK_AccessoriesToBoat_Accessory = new global::System.Data.DataRelation("FK_AccessoriesToBoat_Accessory", new global::System.Data.DataColumn[] {
-                        this.tableAccessory.AccessoryIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableAccessoriesToBoat.AccessoryIDColumn}, false);
-            this.Relations.Add(this.relationFK_AccessoriesToBoat_Accessory);
+            global::System.Data.ForeignKeyConstraint fkc;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_AccessoriesToBoat_Boat", new global::System.Data.DataColumn[] {
+                        this.tableBoat.IDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAccessoriesToBoat.BoatIDColumn});
+            this.tableAccessoriesToBoat.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
             this.relationFK_AccessoriesToBoat_Boat = new global::System.Data.DataRelation("FK_AccessoriesToBoat_Boat", new global::System.Data.DataColumn[] {
                         this.tableBoat.IDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAccessoriesToBoat.BoatIDColumn}, false);
             this.Relations.Add(this.relationFK_AccessoriesToBoat_Boat);
+            this.relationFK_AccessoriesToBoat_Accessory = new global::System.Data.DataRelation("FK_AccessoriesToBoat_Accessory", new global::System.Data.DataColumn[] {
+                        this.tableAccessory.AccessoryIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableAccessoriesToBoat.AccessoryIDColumn}, false);
+            this.Relations.Add(this.relationFK_AccessoriesToBoat_Accessory);
             this.relationFK_Accessory_Partner = new global::System.Data.DataRelation("FK_Accessory_Partner", new global::System.Data.DataColumn[] {
                         this.tablePartner.PartnerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableAccessory.PartnerIDColumn}, false);
             this.Relations.Add(this.relationFK_Accessory_Partner);
-            this.relationFK_Contract_Order = new global::System.Data.DataRelation("FK_Contract_Order", new global::System.Data.DataColumn[] {
-                        this.tableOrder.OrderColumn}, new global::System.Data.DataColumn[] {
-                        this.tableContract.OrderIDColumn}, false);
-            this.Relations.Add(this.relationFK_Contract_Order);
             this.relationFK_Invoice_Contract = new global::System.Data.DataRelation("FK_Invoice_Contract", new global::System.Data.DataColumn[] {
                         this.tableContract.ContractIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableInvoice.ContractIDColumn}, false);
             this.Relations.Add(this.relationFK_Invoice_Contract);
-            this.relationFK_Order_Boat = new global::System.Data.DataRelation("FK_Order_Boat", new global::System.Data.DataColumn[] {
-                        this.tableBoat.IDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableOrder.BoatColumn}, false);
-            this.Relations.Add(this.relationFK_Order_Boat);
             this.relationFK_Order_Customer = new global::System.Data.DataRelation("FK_Order_Customer", new global::System.Data.DataColumn[] {
                         this.tableCustomer.CustomerIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableOrder.CustomerColumn}, false);
@@ -510,6 +507,10 @@ namespace WindowsFormsApp1 {
                         this.tableOrder.OrderColumn}, new global::System.Data.DataColumn[] {
                         this.tableOrderDetails.OrderIDColumn}, false);
             this.Relations.Add(this.relationFK_OrderDetails_Order);
+            this.relationOrder_Contract = new global::System.Data.DataRelation("Order_Contract", new global::System.Data.DataColumn[] {
+                        this.tableOrder.OrderColumn}, new global::System.Data.DataColumn[] {
+                        this.tableContract.OrderIDColumn}, false);
+            this.Relations.Add(this.relationOrder_Contract);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1854,7 +1855,7 @@ namespace WindowsFormsApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ContractRow AddContractRow(float ContractID, System.DateTime Date, int DepositPayed, OrderRow parentOrderRowByFK_Contract_Order, int ContractTotalPrice, int ContracTotalPriceinclVAT, string ProductionProcess) {
+            public ContractRow AddContractRow(float ContractID, System.DateTime Date, int DepositPayed, OrderRow parentOrderRowByOrder_Contract, int ContractTotalPrice, int ContracTotalPriceinclVAT, string ProductionProcess) {
                 ContractRow rowContractRow = ((ContractRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         ContractID,
@@ -1864,8 +1865,8 @@ namespace WindowsFormsApp1 {
                         ContractTotalPrice,
                         ContracTotalPriceinclVAT,
                         ProductionProcess};
-                if ((parentOrderRowByFK_Contract_Order != null)) {
-                    columnValuesArray[3] = parentOrderRowByFK_Contract_Order[0];
+                if ((parentOrderRowByOrder_Contract != null)) {
+                    columnValuesArray[3] = parentOrderRowByOrder_Contract[0];
                 }
                 rowContractRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowContractRow);
@@ -2954,14 +2955,14 @@ namespace WindowsFormsApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public OrderRow AddOrderRow(float Order, System.DateTime Date, SalesPersonRow parentSalesPersonRowByFK_Order_SalesPerson, CustomerRow parentCustomerRowByFK_Order_Customer, BoatRow parentBoatRowByFK_Order_Boat, string DeliveryAddress, string City) {
+            public OrderRow AddOrderRow(float Order, System.DateTime Date, SalesPersonRow parentSalesPersonRowByFK_Order_SalesPerson, CustomerRow parentCustomerRowByFK_Order_Customer, int Boat, string DeliveryAddress, string City) {
                 OrderRow rowOrderRow = ((OrderRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Order,
                         Date,
                         null,
                         null,
-                        null,
+                        Boat,
                         DeliveryAddress,
                         City};
                 if ((parentSalesPersonRowByFK_Order_SalesPerson != null)) {
@@ -2969,9 +2970,6 @@ namespace WindowsFormsApp1 {
                 }
                 if ((parentCustomerRowByFK_Order_Customer != null)) {
                     columnValuesArray[3] = parentCustomerRowByFK_Order_Customer[0];
-                }
-                if ((parentBoatRowByFK_Order_Boat != null)) {
-                    columnValuesArray[4] = parentBoatRowByFK_Order_Boat[0];
                 }
                 rowOrderRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowOrderRow);
@@ -4188,23 +4186,23 @@ namespace WindowsFormsApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public AccessoryRow AccessoryRow {
-                get {
-                    return ((AccessoryRow)(this.GetParentRow(this.Table.ParentRelations["FK_AccessoriesToBoat_Accessory"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_AccessoriesToBoat_Accessory"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public BoatRow BoatRow {
                 get {
                     return ((BoatRow)(this.GetParentRow(this.Table.ParentRelations["FK_AccessoriesToBoat_Boat"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_AccessoriesToBoat_Boat"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public AccessoryRow AccessoryRow {
+                get {
+                    return ((AccessoryRow)(this.GetParentRow(this.Table.ParentRelations["FK_AccessoriesToBoat_Accessory"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_AccessoriesToBoat_Accessory"]);
                 }
             }
             
@@ -4623,17 +4621,6 @@ namespace WindowsFormsApp1 {
                     return ((AccessoriesToBoatRow[])(base.GetChildRows(this.Table.ChildRelations["FK_AccessoriesToBoat_Boat"])));
                 }
             }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public OrderRow[] GetOrderRows() {
-                if ((this.Table.ChildRelations["FK_Order_Boat"] == null)) {
-                    return new OrderRow[0];
-                }
-                else {
-                    return ((OrderRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Order_Boat"])));
-                }
-            }
         }
         
         /// <summary>
@@ -4736,10 +4723,10 @@ namespace WindowsFormsApp1 {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public OrderRow OrderRow {
                 get {
-                    return ((OrderRow)(this.GetParentRow(this.Table.ParentRelations["FK_Contract_Order"])));
+                    return ((OrderRow)(this.GetParentRow(this.Table.ParentRelations["Order_Contract"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Contract_Order"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["Order_Contract"]);
                 }
             }
             
@@ -5172,17 +5159,6 @@ namespace WindowsFormsApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public BoatRow BoatRow {
-                get {
-                    return ((BoatRow)(this.GetParentRow(this.Table.ParentRelations["FK_Order_Boat"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Order_Boat"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public CustomerRow CustomerRow {
                 get {
                     return ((CustomerRow)(this.GetParentRow(this.Table.ParentRelations["FK_Order_Customer"])));
@@ -5217,23 +5193,23 @@ namespace WindowsFormsApp1 {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public ContractRow[] GetContractRows() {
-                if ((this.Table.ChildRelations["FK_Contract_Order"] == null)) {
-                    return new ContractRow[0];
-                }
-                else {
-                    return ((ContractRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Contract_Order"])));
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public OrderDetailsRow[] GetOrderDetailsRows() {
                 if ((this.Table.ChildRelations["FK_OrderDetails_Order"] == null)) {
                     return new OrderDetailsRow[0];
                 }
                 else {
                     return ((OrderDetailsRow[])(base.GetChildRows(this.Table.ChildRelations["FK_OrderDetails_Order"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public ContractRow[] GetContractRows() {
+                if ((this.Table.ChildRelations["Order_Contract"] == null)) {
+                    return new ContractRow[0];
+                }
+                else {
+                    return ((ContractRow[])(base.GetChildRows(this.Table.ChildRelations["Order_Contract"])));
                 }
             }
         }
@@ -6984,12 +6960,51 @@ SELECT ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice, VAT F
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[5];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice, VAT FR" +
                 "OM dbo.Boat";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "DELETE FROM Boat\r\nWHERE        (ID = @Param1)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[2].Connection = this.Connection;
+            this._commandCollection[2].CommandText = "SELECT        ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice," +
+                " VAT\r\nFROM            Boat\r\nWHERE        (ID = @ID)";
+            this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[3].Connection = this.Connection;
+            this._commandCollection[3].CommandText = @"INSERT INTO [dbo].[Boat] ([ID], [Model], [BoatType], [NumberOfRowers], [Mast], [Colour], [Wood], [BasePrice], [VAT]) VALUES (@ID, @Model, @BoatType, @NumberOfRowers, @Mast, @Colour, @Wood, @BasePrice, @VAT);
+SELECT ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice, VAT FROM Boat WHERE (ID = @ID)";
+            this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Model", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BoatType", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "BoatType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NumberOfRowers", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "NumberOfRowers", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Mast", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "Mast", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Colour", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Colour", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Wood", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Wood", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BasePrice", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "BasePrice", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@VAT", global::System.Data.SqlDbType.Real, 4, global::System.Data.ParameterDirection.Input, 0, 0, "VAT", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[4].Connection = this.Connection;
+            this._commandCollection[4].CommandText = "UPDATE       Boat\r\nSET                Model = @Model, BoatType = @BoatType, Numbe" +
+                "rOfRowers = @NumberOfRowers, Mast = @Mast, Colour = @Colour, Wood = @Wood, BaseP" +
+                "rice = @BasePrice\r\nWHERE        (ID = @ID); \r\n";
+            this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Model", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Model", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BoatType", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "BoatType", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@NumberOfRowers", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "NumberOfRowers", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Mast", global::System.Data.SqlDbType.Bit, 1, global::System.Data.ParameterDirection.Input, 0, 0, "Mast", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Colour", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Colour", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Wood", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Wood", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BasePrice", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "BasePrice", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7014,6 +7029,20 @@ SELECT ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice, VAT F
             DbBoatDataSet.BoatDataTable dataTable = new DbBoatDataSet.BoatDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int ID(DbBoatDataSet.BoatDataTable dataTable, int ID1) {
+            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID1));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7317,6 +7346,148 @@ SELECT ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice, VAT F
                     int Original_BasePrice, 
                     global::System.Nullable<float> Original_VAT) {
             return this.Update(Original_ID, Model, BoatType, NumberOfRowers, Mast, Colour, Wood, BasePrice, VAT, Original_ID, Original_Model, Original_BoatType, Original_NumberOfRowers, Original_Mast, Original_Colour, Original_Wood, Original_BasePrice, Original_VAT);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int DeleteID(int Param1) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[1];
+            command.Parameters[0].Value = ((int)(Param1));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
+        public virtual int newBoat(int ID, string Model, string BoatType, global::System.Nullable<int> NumberOfRowers, bool Mast, string Colour, string Wood, int BasePrice, global::System.Nullable<float> VAT) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            command.Parameters[0].Value = ((int)(ID));
+            if ((Model == null)) {
+                throw new global::System.ArgumentNullException("Model");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(Model));
+            }
+            if ((BoatType == null)) {
+                throw new global::System.ArgumentNullException("BoatType");
+            }
+            else {
+                command.Parameters[2].Value = ((string)(BoatType));
+            }
+            if ((NumberOfRowers.HasValue == true)) {
+                command.Parameters[3].Value = ((int)(NumberOfRowers.Value));
+            }
+            else {
+                command.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            command.Parameters[4].Value = ((bool)(Mast));
+            if ((Colour == null)) {
+                command.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[5].Value = ((string)(Colour));
+            }
+            if ((Wood == null)) {
+                throw new global::System.ArgumentNullException("Wood");
+            }
+            else {
+                command.Parameters[6].Value = ((string)(Wood));
+            }
+            command.Parameters[7].Value = ((int)(BasePrice));
+            if ((VAT.HasValue == true)) {
+                command.Parameters[8].Value = ((float)(VAT.Value));
+            }
+            else {
+                command.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int UpdateBoat(string Model, string BoatType, global::System.Nullable<int> NumberOfRowers, bool Mast, string Colour, string Wood, int BasePrice, int ID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
+            if ((Model == null)) {
+                throw new global::System.ArgumentNullException("Model");
+            }
+            else {
+                command.Parameters[0].Value = ((string)(Model));
+            }
+            if ((BoatType == null)) {
+                throw new global::System.ArgumentNullException("BoatType");
+            }
+            else {
+                command.Parameters[1].Value = ((string)(BoatType));
+            }
+            if ((NumberOfRowers.HasValue == true)) {
+                command.Parameters[2].Value = ((int)(NumberOfRowers.Value));
+            }
+            else {
+                command.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            command.Parameters[3].Value = ((bool)(Mast));
+            if ((Colour == null)) {
+                command.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[4].Value = ((string)(Colour));
+            }
+            if ((Wood == null)) {
+                throw new global::System.ArgumentNullException("Wood");
+            }
+            else {
+                command.Parameters[5].Value = ((string)(Wood));
+            }
+            command.Parameters[6].Value = ((int)(BasePrice));
+            command.Parameters[7].Value = ((int)(ID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
         }
     }
     
@@ -10027,7 +10198,7 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[9];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[11];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys " +
@@ -10044,65 +10215,77 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
             this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
-            this._commandCollection[2].CommandText = "SELECT        SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, " +
-                "statys\r\nFROM            SalesPerson\r\nWHERE        (SalesPersonID = @ID)";
+            this._commandCollection[2].CommandText = "DELETE FROM SalesPerson\r\nWHERE        (SalesPersonID = @Original_SalesPersonID)";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[2].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SalesPersonID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
-            this._commandCollection[3].CommandText = "INSERT INTO SalesPerson\r\n                         (SalesPersonID, FirstName, Fami" +
-                "lyName, Login, Password, Role, Vxod, statys)\r\nVALUES        (@SalesPersonID,@Fir" +
-                "stName,@FamilyName,@Login,@Password,@Role,@Vxod,@statys); \r\n";
+            this._commandCollection[3].CommandText = "SELECT        SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, " +
+                "statys\r\nFROM            SalesPerson\r\nWHERE        (SalesPersonID = @ID)";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SalesPersonID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FamilyName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FamilyName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Role", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Role", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Vxod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Vxod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statys", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "statys", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[3].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[4] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[4].Connection = this.Connection;
-            this._commandCollection[4].CommandText = "SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys " +
-                "FROM SalesPerson WHERE (Login = @Param1) AND (Password = @Param2)";
+            this._commandCollection[4].CommandText = "INSERT INTO SalesPerson\r\n                         (SalesPersonID, FirstName, Fami" +
+                "lyName, Login, Password, Role, Vxod, statys)\r\nVALUES        (@SalesPersonID,@Fir" +
+                "stName,@FamilyName,@Login,@Password,@Role,@Vxod,@statys); \r\n";
             this._commandCollection[4].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@SalesPersonID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FamilyName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FamilyName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Role", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Role", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Vxod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Vxod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[4].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statys", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "statys", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[5] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[5].Connection = this.Connection;
-            this._commandCollection[5].CommandText = "SELECT        SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, " +
-                "statys\r\nFROM            SalesPerson\r\nWHERE        (Login = @Login) AND (Password" +
-                " = @Password)";
+            this._commandCollection[5].CommandText = "SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys " +
+                "FROM SalesPerson WHERE (Login = @Param1) AND (Password = @Param2)";
             this._commandCollection[5].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[5].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param2", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[6] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[6].Connection = this.Connection;
-            this._commandCollection[6].CommandText = "UPDATE       SalesPerson\r\nSET                Vxod = @Vxod\r\nWHERE        (SalesPer" +
-                "sonID = @Original_SalesPersonID); \r\n";
+            this._commandCollection[6].CommandText = "SELECT        Login, Password, SalesPersonID, FirstName, FamilyName, Role, Vxod, " +
+                "statys\r\nFROM            SalesPerson\r\nWHERE        (Login = @Login) AND (Password" +
+                " = @Password)";
             this._commandCollection[6].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Vxod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Vxod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SalesPersonID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[6].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[7] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[7].Connection = this.Connection;
-            this._commandCollection[7].CommandText = "UPDATE       SalesPerson\r\nSET                Password = @Par\r\nWHERE        (Sales" +
-                "PersonID = @Param1); \r\n";
+            this._commandCollection[7].CommandText = "UPDATE       SalesPerson\r\nSET                statys = @statys\r\nWHERE        (Sale" +
+                "sPersonID = @Original_SalesPersonID); \r\n";
             this._commandCollection[7].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Par", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@statys", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "statys", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[7].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SalesPersonID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._commandCollection[8] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[8].Connection = this.Connection;
-            this._commandCollection[8].CommandText = "UPDATE       SalesPerson\r\nSET                FirstName = @FirstName, FamilyName =" +
-                " @FamilyName, Login = @Login, Password = @Password, Role = @Role\r\nWHERE        (" +
-                "SalesPersonID = @Original_SalesPersonID); \r\n";
+            this._commandCollection[8].CommandText = "UPDATE       SalesPerson\r\nSET                Vxod = @Vxod\r\nWHERE        (SalesPer" +
+                "sonID = @Original_SalesPersonID); \r\n";
             this._commandCollection[8].CommandType = global::System.Data.CommandType.Text;
-            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FamilyName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FamilyName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Role", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Role", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Vxod", global::System.Data.SqlDbType.DateTime, 8, global::System.Data.ParameterDirection.Input, 0, 0, "Vxod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[8].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_SalesPersonID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[9] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[9].Connection = this.Connection;
+            this._commandCollection[9].CommandText = "UPDATE       SalesPerson\r\nSET                Password = @Par\r\nWHERE        (Sales" +
+                "PersonID = @Param1); \r\n";
+            this._commandCollection[9].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[9].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Par", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[9].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._commandCollection[10] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[10].Connection = this.Connection;
+            this._commandCollection[10].CommandText = "UPDATE       SalesPerson\r\nSET                FirstName = @FirstName, FamilyName =" +
+                " @FamilyName, Login = @Login, Password = @Password, Role = @Role\r\nWHERE        (" +
+                "SalesPersonID = @Param1);  \r\n";
+            this._commandCollection[10].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FirstName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FirstName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@FamilyName", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "FamilyName", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Login", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Login", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Password", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Password", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Role", global::System.Data.SqlDbType.NVarChar, 50, global::System.Data.ParameterDirection.Input, 0, 0, "Role", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[10].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Param1", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "SalesPersonID", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -10160,7 +10343,7 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int ID(DbBoatDataSet.SalesPersonDataTable dataTable, int ID1) {
-            this.Adapter.SelectCommand = this.CommandCollection[2];
+            this.Adapter.SelectCommand = this.CommandCollection[3];
             this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID1));
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -10174,7 +10357,7 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int Login(DbBoatDataSet.SalesPersonDataTable dataTable, string Param1, string Param2) {
-            this.Adapter.SelectCommand = this.CommandCollection[4];
+            this.Adapter.SelectCommand = this.CommandCollection[5];
             if ((Param1 == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -10199,7 +10382,7 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
         public virtual int LogPass(DbBoatDataSet.SalesPersonDataTable dataTable, string Login, string Password) {
-            this.Adapter.SelectCommand = this.CommandCollection[5];
+            this.Adapter.SelectCommand = this.CommandCollection[6];
             if ((Login == null)) {
                 this.Adapter.SelectCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -10530,9 +10713,33 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, false)]
+        public virtual int Delete1(int Original_SalesPersonID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[2];
+            command.Parameters[0].Value = ((int)(Original_SalesPersonID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, false)]
         public virtual int InsertQuery(int SalesPersonID, string FirstName, string FamilyName, string Login, string Password, string Role, global::System.Nullable<global::System.DateTime> Vxod, string statys) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[3];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[4];
             command.Parameters[0].Value = ((int)(SalesPersonID));
             if ((FirstName == null)) {
                 throw new global::System.ArgumentNullException("FirstName");
@@ -10597,8 +10804,38 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
+        public virtual int Statys(string statys1, int Original_SalesPersonID) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
+            if ((statys1 == null)) {
+                command.Parameters[0].Value = global::System.DBNull.Value;
+            }
+            else {
+                command.Parameters[0].Value = ((string)(statys1));
+            }
+            command.Parameters[1].Value = ((int)(Original_SalesPersonID));
+            global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
+            if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                command.Connection.Open();
+            }
+            int returnValue;
+            try {
+                returnValue = command.ExecuteNonQuery();
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    command.Connection.Close();
+                }
+            }
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery(global::System.Nullable<global::System.DateTime> Vxod, int Original_SalesPersonID) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[6];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[8];
             if ((Vxod.HasValue == true)) {
                 command.Parameters[0].Value = ((System.DateTime)(Vxod.Value));
             }
@@ -10628,7 +10865,7 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
         public virtual int UpdateQuery1(string Par, int Param1) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[7];
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[9];
             if ((Par == null)) {
                 command.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -10657,8 +10894,8 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, false)]
-        public virtual int UpdateQuery2(string FirstName, string FamilyName, string Login, string Password, string Role, int Original_SalesPersonID) {
-            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[8];
+        public virtual int UpdateQuery2(string FirstName, string FamilyName, string Login, string Password, string Role, int Param1) {
+            global::System.Data.SqlClient.SqlCommand command = this.CommandCollection[10];
             if ((FirstName == null)) {
                 throw new global::System.ArgumentNullException("FirstName");
             }
@@ -10689,7 +10926,7 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
             else {
                 command.Parameters[4].Value = ((string)(Role));
             }
-            command.Parameters[5].Value = ((int)(Original_SalesPersonID));
+            command.Parameters[5].Value = ((int)(Param1));
             global::System.Data.ConnectionState previousConnectionState = command.Connection.State;
             if (((command.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -11008,15 +11245,6 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateUpdatedRows(DbBoatDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._boatTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Boat.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._boatTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._customerTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Customer.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -11059,6 +11287,15 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._accessoryTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._boatTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Boat.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._boatTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -11108,14 +11345,6 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private int UpdateInsertedRows(DbBoatDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
-            if ((this._boatTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Boat.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._boatTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._customerTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Customer.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -11153,6 +11382,14 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._accessoryTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._boatTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Boat.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._boatTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -11230,6 +11467,14 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._boatTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Boat.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._boatTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._accessoryTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Accessory.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -11267,14 +11512,6 @@ SELECT SalesPersonID, FirstName, FamilyName, Login, Password, Role, Vxod, statys
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._customerTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._boatTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Boat.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._boatTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
