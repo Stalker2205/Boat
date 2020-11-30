@@ -39,6 +39,7 @@
             this.salesPersonTableAdapter = new WindowsFormsApp1.DbBoatDataSetTableAdapters.SalesPersonTableAdapter();
             this.tableAdapterManager = new WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager();
             this.popitLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             passwordLabel = new System.Windows.Forms.Label();
             loginLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dbBoatDataSet)).BeginInit();
@@ -79,7 +80,7 @@
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(77, 91);
+            this.LoginButton.Location = new System.Drawing.Point(53, 83);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(100, 23);
             this.LoginButton.TabIndex = 6;
@@ -114,6 +115,7 @@
             this.tableAdapterManager.OrderTableAdapter = null;
             this.tableAdapterManager.PartnerTableAdapter = null;
             this.tableAdapterManager.SalesPersonTableAdapter = this.salesPersonTableAdapter;
+            this.tableAdapterManager.Table_1TableAdapter = null;
             this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // popitLabel
@@ -125,11 +127,22 @@
             this.popitLabel.TabIndex = 7;
             this.popitLabel.Text = "Количество попыток : 3";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(53, 112);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "Форум";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(198, 143);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.popitLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.PasswordTextbox);
@@ -156,5 +169,6 @@
         private System.Windows.Forms.TextBox PasswordTextbox;
         private System.Windows.Forms.Button LoginButton;
         private System.Windows.Forms.Label popitLabel;
+        private System.Windows.Forms.Button button1;
     }
 }

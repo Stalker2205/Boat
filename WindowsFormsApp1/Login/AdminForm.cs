@@ -54,5 +54,11 @@ namespace WindowsFormsApp1
             BoatForm bf = new BoatForm();
             bf.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
+        }
     }
 }

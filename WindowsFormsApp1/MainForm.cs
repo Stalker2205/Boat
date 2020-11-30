@@ -20,6 +20,14 @@ namespace WindowsFormsApp1
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbBoatDataSet.OrderDetails". При необходимости она может быть перемещена или удалена.
+            this.orderDetailsTableAdapter.Fill(this.dbBoatDataSet.OrderDetails);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbBoatDataSet.Order". При необходимости она может быть перемещена или удалена.
+            this.orderTableAdapter.Fill(this.dbBoatDataSet.Order);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbBoatDataSet.AccessoriesToBoat". При необходимости она может быть перемещена или удалена.
+          //  this.accessoriesToBoatTableAdapter.Fill(this.dbBoatDataSet.AccessoriesToBoat);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "dbBoatDataSet.Contract". При необходимости она может быть перемещена или удалена.
+            this.contractTableAdapter.Fill(this.dbBoatDataSet.Contract);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "dbBoatDataSet.SalesPerson". При необходимости она может быть перемещена или удалена.
             this.salesPersonTableAdapter.Fill(this.dbBoatDataSet.SalesPerson);
             LoginForm log = new LoginForm();
@@ -48,8 +56,15 @@ namespace WindowsFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Prem.keyCreat = 0; 
             CreateZaka Cz = new CreateZaka();
             Cz.ShowDialog();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
         }
     }
 }

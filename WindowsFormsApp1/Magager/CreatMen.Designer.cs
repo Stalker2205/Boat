@@ -46,6 +46,7 @@
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             salesPersonIDLabel = new System.Windows.Forms.Label();
             firstNameLabel = new System.Windows.Forms.Label();
             familyNameLabel = new System.Windows.Forms.Label();
@@ -59,7 +60,7 @@
             // salesPersonIDLabel
             // 
             salesPersonIDLabel.AutoSize = true;
-            salesPersonIDLabel.Location = new System.Drawing.Point(13, 15);
+            salesPersonIDLabel.Location = new System.Drawing.Point(13, 42);
             salesPersonIDLabel.Name = "salesPersonIDLabel";
             salesPersonIDLabel.Size = new System.Drawing.Size(86, 13);
             salesPersonIDLabel.TabIndex = 1;
@@ -68,7 +69,7 @@
             // firstNameLabel
             // 
             firstNameLabel.AutoSize = true;
-            firstNameLabel.Location = new System.Drawing.Point(39, 41);
+            firstNameLabel.Location = new System.Drawing.Point(39, 68);
             firstNameLabel.Name = "firstNameLabel";
             firstNameLabel.Size = new System.Drawing.Size(60, 13);
             firstNameLabel.TabIndex = 3;
@@ -77,7 +78,7 @@
             // familyNameLabel
             // 
             familyNameLabel.AutoSize = true;
-            familyNameLabel.Location = new System.Drawing.Point(29, 67);
+            familyNameLabel.Location = new System.Drawing.Point(29, 94);
             familyNameLabel.Name = "familyNameLabel";
             familyNameLabel.Size = new System.Drawing.Size(70, 13);
             familyNameLabel.TabIndex = 5;
@@ -86,7 +87,7 @@
             // loginLabel
             // 
             loginLabel.AutoSize = true;
-            loginLabel.Location = new System.Drawing.Point(63, 93);
+            loginLabel.Location = new System.Drawing.Point(63, 120);
             loginLabel.Name = "loginLabel";
             loginLabel.Size = new System.Drawing.Size(36, 13);
             loginLabel.TabIndex = 7;
@@ -95,7 +96,7 @@
             // passwordLabel
             // 
             passwordLabel.AutoSize = true;
-            passwordLabel.Location = new System.Drawing.Point(43, 119);
+            passwordLabel.Location = new System.Drawing.Point(43, 146);
             passwordLabel.Name = "passwordLabel";
             passwordLabel.Size = new System.Drawing.Size(56, 13);
             passwordLabel.TabIndex = 9;
@@ -104,7 +105,7 @@
             // roleLabel
             // 
             roleLabel.AutoSize = true;
-            roleLabel.Location = new System.Drawing.Point(67, 145);
+            roleLabel.Location = new System.Drawing.Point(67, 172);
             roleLabel.Name = "roleLabel";
             roleLabel.Size = new System.Drawing.Size(32, 13);
             roleLabel.TabIndex = 11;
@@ -137,12 +138,13 @@
             this.tableAdapterManager.OrderTableAdapter = null;
             this.tableAdapterManager.PartnerTableAdapter = null;
             this.tableAdapterManager.SalesPersonTableAdapter = this.salesPersonTableAdapter;
+            this.tableAdapterManager.Table_1TableAdapter = null;
             this.tableAdapterManager.UpdateOrder = WindowsFormsApp1.DbBoatDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // salesPersonIDTextBox
             // 
             this.salesPersonIDTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salesPersonBindingSource, "SalesPersonID", true));
-            this.salesPersonIDTextBox.Location = new System.Drawing.Point(105, 12);
+            this.salesPersonIDTextBox.Location = new System.Drawing.Point(105, 39);
             this.salesPersonIDTextBox.Name = "salesPersonIDTextBox";
             this.salesPersonIDTextBox.Size = new System.Drawing.Size(100, 20);
             this.salesPersonIDTextBox.TabIndex = 2;
@@ -150,7 +152,7 @@
             // firstNameTextBox
             // 
             this.firstNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salesPersonBindingSource, "FirstName", true));
-            this.firstNameTextBox.Location = new System.Drawing.Point(105, 38);
+            this.firstNameTextBox.Location = new System.Drawing.Point(105, 65);
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.firstNameTextBox.TabIndex = 4;
@@ -158,7 +160,7 @@
             // familyNameTextBox
             // 
             this.familyNameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salesPersonBindingSource, "FamilyName", true));
-            this.familyNameTextBox.Location = new System.Drawing.Point(105, 64);
+            this.familyNameTextBox.Location = new System.Drawing.Point(105, 91);
             this.familyNameTextBox.Name = "familyNameTextBox";
             this.familyNameTextBox.Size = new System.Drawing.Size(100, 20);
             this.familyNameTextBox.TabIndex = 6;
@@ -166,7 +168,7 @@
             // loginTextBox
             // 
             this.loginTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salesPersonBindingSource, "Login", true));
-            this.loginTextBox.Location = new System.Drawing.Point(105, 90);
+            this.loginTextBox.Location = new System.Drawing.Point(105, 117);
             this.loginTextBox.Name = "loginTextBox";
             this.loginTextBox.Size = new System.Drawing.Size(100, 20);
             this.loginTextBox.TabIndex = 8;
@@ -174,14 +176,14 @@
             // passwordTextBox
             // 
             this.passwordTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.salesPersonBindingSource, "Password", true));
-            this.passwordTextBox.Location = new System.Drawing.Point(105, 116);
+            this.passwordTextBox.Location = new System.Drawing.Point(105, 143);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(100, 20);
             this.passwordTextBox.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(42, 178);
+            this.button1.Location = new System.Drawing.Point(42, 205);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(163, 44);
             this.button1.TabIndex = 13;
@@ -195,17 +197,28 @@
             this.comboBox1.Items.AddRange(new object[] {
             "Администратор",
             "Менеджер"});
-            this.comboBox1.Location = new System.Drawing.Point(105, 142);
+            this.comboBox1.Location = new System.Drawing.Point(105, 169);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(100, 21);
             this.comboBox1.TabIndex = 14;
             this.comboBox1.Text = "Менеджер";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(12, 12);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(193, 23);
+            this.button2.TabIndex = 15;
+            this.button2.Text = "Форум";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // CreatMen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(225, 237);
+            this.ClientSize = new System.Drawing.Size(225, 254);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(roleLabel);
@@ -242,5 +255,6 @@
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button2;
     }
 }

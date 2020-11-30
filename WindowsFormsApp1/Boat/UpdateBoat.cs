@@ -26,6 +26,13 @@ namespace WindowsFormsApp1
         }
         int id, price, rowers;
         string type;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
+        }
+
         bool mast;
         private void button1_Click(object sender, EventArgs e)
         {

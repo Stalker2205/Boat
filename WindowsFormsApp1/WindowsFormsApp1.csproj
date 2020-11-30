@@ -44,6 +44,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="UtilityForm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\UtilityForm.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Boat\BoatForm.cs">
@@ -64,10 +68,22 @@
     <Compile Include="Boat\CreatBoatForm.Designer.cs">
       <DependentUpon>CreatBoatForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateZaka.cs">
+    <Compile Include="Forum\ForumRab.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateZaka.Designer.cs">
+    <Compile Include="Forum\ForumRab.Designer.cs">
+      <DependentUpon>ForumRab.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forum\Forum.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forum\Forum.Designer.cs">
+      <DependentUpon>Forum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Zakaz\CreateZaka.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Zakaz\CreateZaka.Designer.cs">
       <DependentUpon>CreateZaka.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\AdminForm.cs">
@@ -132,7 +148,13 @@
     <EmbeddedResource Include="Boat\CreatBoatForm.resx">
       <DependentUpon>CreatBoatForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateZaka.resx">
+    <EmbeddedResource Include="Forum\ForumRab.resx">
+      <DependentUpon>ForumRab.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forum\Forum.resx">
+      <DependentUpon>Forum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Zakaz\CreateZaka.resx">
       <DependentUpon>CreateZaka.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\AdminForm.resx">
@@ -188,6 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UtilityForm.dll" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

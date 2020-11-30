@@ -48,5 +48,11 @@ namespace WindowsFormsApp1
             this.boatTableAdapter.Fill(this.dbBoatDataSet.Boat);
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
+        }
     }
 }

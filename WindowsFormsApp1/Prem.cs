@@ -14,5 +14,6 @@ namespace WindowsFormsApp1
         public static int update;
         public static int CodeBoat;
         public static int numZ;
+        public static int keyCreat = 0;
     }
 }

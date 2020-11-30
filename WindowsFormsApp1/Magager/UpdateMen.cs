@@ -27,6 +27,13 @@ namespace WindowsFormsApp1
             family,
             login,
             passwoed;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             first = firstNameTextBox.Text;

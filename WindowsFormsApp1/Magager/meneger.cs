@@ -51,5 +51,11 @@ namespace WindowsFormsApp1
             catch { MessageBox.Show("Продавец участвует в сделке, вы не можите его удалить"); return; }
             this.salesPersonTableAdapter.Fill(this.dbBoatDataSet.SalesPerson);
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
+        }
     }
 }

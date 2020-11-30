@@ -29,6 +29,13 @@ namespace WindowsFormsApp1
             family
             , log,
             pas;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            ForumRab nn = new ForumRab();
+            nn.ShowDialog();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             id = Convert.ToInt32(salesPersonIDTextBox.Text);
